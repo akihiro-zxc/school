@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Спорт школы № 9</title>
+  <style>
+    :root {
+      --yellow: #ffd400;
+      --black: #171717;
+      --gray: #f3f3f3;
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--black);
+      color: var(--white);
+      padding: 16px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    nav a:hover { color: var(--yellow); }
+
+    .hero {
+      padding: 90px 6%;
+      background: var(--yellow);
+    }
+
+    .hero-content { max-width: 800px; }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.05;
+      margin: 0 0 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 650px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 13px 22px;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      border: 0;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .button:hover { background: #333; }
+
+    section { padding: 64px 6%; }
+
+    section:nth-of-type(even) { background: var(--gray); }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 40px);
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0 0 28px;
+      color: #555;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 24px;
+      border-radius: 10px;
+      border-top: 6px solid var(--yellow);
+      box-shadow: 0 4px 16px #0000000d;
+    }
+
+    .card h3 { margin: 0 0 8px; }
+
+    .poll-box {
+      max-width: 650px;
+      background: var(--white);
+      padding: 26px;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px #0000000d;
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    legend {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .option {
+      display: block;
+      padding: 11px 0;
+      cursor: pointer;
+    }
+
+    .option input { margin-right: 9px; }
+
+    #message {
+      min-height: 24px;
+      margin-top: 12px;
+      font-weight: 700;
+    }
+
+    .results {
+      max-width: 650px;
+      margin-top: 28px;
+    }
+
+    .result-row { margin: 16px 0; }
+
+    .result-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 5px;
+    }
+
+    .bar {
+      height: 18px;
+      background: #e4e4e4;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      background: var(--yellow);
+      transition: width .4s ease;
+    }
+
+    footer {
+      padding: 28px 6%;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    @media (max-width: 600px) {
+      header { align-items: flex-start; }
+      nav { gap: 12px; }
+      .hero { padding-top: 64px; padding-bottom: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">ГБОУ Свердловская средняя школа № 9</div>
+    <nav aria-label="Основная навигация">
+      <a href="#sections">Секции</a>
+      <a href="#poll">Опрос</a>
+      <a href="#about">О проекте</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Спорт начинается здесь</h1>
+        <p>
+          Узнайте о спортивных секциях школы и помогите нам понять,
+          какие направления интересны ученикам.
+        </p>
+        <a class="button" href="#sections">Выбрать секцию</a>
+      </div>
+    </section>
+
+    <section id="sections">
+      <h2>Спортивные секции</h2>
+      <p class="intro">
+        Выберите направление, которое вам интересно. Расписание и контакты
+        можно добавить, когда они будут известны.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Баскетбол</h3>
+          <p>Тренер: Татьяна Андреевна.</p>
+          <p>Командная игра, развитие выносливости и точности.</p>
+        </article>
+
+        <article class="card">
+          <h3>Кикбоксинг</h3>
+          <p>Информация о тренере и расписании будет добавлена.</p>
+          <p>Тренировки помогают развивать силу, координацию и дисциплину.</p>
+        </article>
+
+        <article class="card">
+          <h3>Футбол</h3>
+          <p>Информация о тренере и расписании будет добавлена.</p>
+          <p>Играй в команде, совершенствуй технику и участвуй в матчах.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="poll">
+      <h2>Анонимный опрос</h2>
+      <p class="intro">
+        Ответ не содержит имени или контактных данных. Выберите секцию,
+        в которую хотели бы записаться.
+      </p>
+
+      <div class="poll-box">
+        <form id="pollForm">
+          <fieldset>
+            <legend>Какая секция вам интереснее?</legend>
+
+            <label class="option">
+              <input type="radio" name="section" value="Баскетбол" required>
+              Баскетбол
+            </label>
+
+            <label class="option">
+              <input type="radio" name="section" value="Кикбоксинг">
+              Кикбоксинг
+            </label>
+
+            <label class="option">
+              <input type="radio" name="section" value="Футбол">
+              Футбол
+            </label>
+          </fieldset>
+
+          <button class="button" type="submit">Отправить ответ</button>
+          <div id="message" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="results">
+          <h3>Результаты опроса на этом устройстве</h3>
+          <div id="results"></div>
+          <p id="total"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>О проекте</h2>
+      <p class="intro">
+        Этот сайт создан для школьников и педагогов ГБОУ Свердловской
+        средней школы № 9. Здесь можно узнать о спортивных направлениях
+        и выразить своё мнение об интересующих секциях.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    ГБОУ Свердловская средняя школа № 9
+  </footer>
+
+  <script>
+    const options = ["Баскетбол", "Кикбоксинг", "Футбол"];
+    const storageKey = "schoolSportsPoll";
+    const form = document.getElementById("pollForm");
+    const message = document.getElementById("message");
+
+    function getVotes() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {
+          "Баскетбол": 0,
+          "Кикбоксинг": 0,
+          "Футбол": 0
+        };
+      } catch {
+        return {
+          "Баскетбол": 0,
+          "Кикбоксинг": 0,
+          "Футбол": 0
+        };
+      }
+    }
+
+    function renderResults() {
+      const votes = getVotes();
+      const total = options.reduce((sum, option) => sum + (votes[option] || 0), 0);
+      const results = document.getElementById("results");
+
+      results.innerHTML = options.map(option => {
+        const count = votes[option] || 0;
+        const percent = total ? Math.round(count / total * 100) : 0;
+
+        return `
+          <div class="result-row">
+            <div class="result-label">
+              <span>${option}</span>
+              <span>${count} голосов · ${percent}%</span>
+            </div>
+            <div class="bar">
+              <div class="bar-fill" style="width: ${percent}%"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("total").textContent =
+        `Всего ответов на этом устройстве: ${total}`;
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const selected = new FormData(form).get("section");
+      if (!selected) return;
+
+      const votes = getVotes();
+      votes[selected] = (votes[selected] || 0) + 1;
+      localStorage.setItem(storageKey, JSON.stringify(votes));
+
+      message.textContent = "Спасибо! Ваш анонимный ответ сохранён.";
+      form.reset();
+      renderResults();
+    });
+
+    renderResults();
+  </script>
+</body>
+</html>
