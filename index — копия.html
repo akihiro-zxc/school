@@ -88,6 +88,11 @@
 
     .button:hover { background: #333; }
 
+    .button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
     section { padding: 64px 6%; }
 
     section:nth-of-type(even) { background: var(--gray); }
@@ -301,31 +306,34 @@
   <script>
     const options = ["Баскетбол", "Кикбоксинг", "Футбол"];
     const storageKey = "schoolSportsPoll";
+    const votedKey = "schoolSportsPollVoted";
+
     const form = document.getElementById("pollForm");
     const message = document.getElementById("message");
 
     function getVotes() {
+      const emptyVotes = {
+        "Баскетбол": 0,
+        "Кикбоксинг": 0,
+        "Футбол": 0
+      };
+
       try {
-        return JSON.parse(localStorage.getItem(storageKey)) || {
-          "Баскетбол": 0,
-          "Кикбоксинг": 0,
-          "Футбол": 0
-        };
+        const savedVotes = JSON.parse(localStorage.getItem(storageKey));
+        return savedVotes ? { ...emptyVotes, ...savedVotes } : emptyVotes;
       } catch {
-        return {
-          "Баскетбол": 0,
-          "Кикбоксинг": 0,
-          "Футбол": 0
-        };
+        return emptyVotes;
       }
     }
 
     function renderResults() {
       const votes = getVotes();
-      const total = options.reduce((sum, option) => sum + (votes[option] || 0), 0);
-      const results = document.getElementById("results");
+      const total = options.reduce(
+        (sum, option) => sum + (votes[option] || 0),
+        0
+      );
 
-      results.innerHTML = options.map(option => {
+      document.getElementById("results").innerHTML = options.map(option => {
         const count = votes[option] || 0;
         const percent = total ? Math.round(count / total * 100) : 0;
 
@@ -346,18 +354,41 @@
         `Всего ответов на этом устройстве: ${total}`;
     }
 
+    function lockPoll() {
+      form.querySelectorAll("input, button").forEach(element => {
+        element.disabled = true;
+      });
+    }
+
+    if (localStorage.getItem(votedKey) === "true") {
+      message.textContent = "С этого браузера ответ уже отправлен.";
+      lockPoll();
+    }
+
     form.addEventListener("submit", event => {
       event.preventDefault();
 
+      if (localStorage.getItem(votedKey) === "true") {
+        message.textContent =
+          "С этого браузера можно отправить только один ответ.";
+        lockPoll();
+        return;
+      }
+
       const selected = new FormData(form).get("section");
-      if (!selected) return;
+      if (!options.includes(selected)) return;
 
       const votes = getVotes();
       votes[selected] = (votes[selected] || 0) + 1;
-      localStorage.setItem(storageKey, JSON.stringify(votes));
 
-      message.textContent = "Спасибо! Ваш анонимный ответ сохранён.";
+      localStorage.setItem(storageKey, JSON.stringify(votes));
+      localStorage.setItem(votedKey, "true");
+
+      message.textContent =
+        "Спасибо! Ваш ответ сохранён. Повторно проголосовать нельзя.";
+
       form.reset();
+      lockPoll();
       renderResults();
     });
 
